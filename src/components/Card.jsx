@@ -1,8 +1,13 @@
 import React from 'react';
+import { data, Link } from 'react-router-dom';
 
 const Card = ({ title, description, urlToImage, source, date }) => {
   return (
-    <div className="max-w-sm bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300 dark:bg-gray-800">
+    <>
+    {/* <Link to={`/news/${data.title}`} 
+    state={{data}}
+    > */}
+    <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300 dark:bg-gray-800">
       {urlToImage && (
         <img
           className="h-48 w-full object-cover"
@@ -21,6 +26,9 @@ const Card = ({ title, description, urlToImage, source, date }) => {
         </div>
       </div>
     </div>
+    {/* </Link> */}
+    
+    </>
   );
 };
 

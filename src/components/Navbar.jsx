@@ -14,11 +14,13 @@ const Navbar = () => {
                 <h1 className=' text-3xl font-semibold '><Link to='/'> 📰 NewsExpress </Link></h1>
             </div>
             <div className='flex justify-between w-1/3'>
-                <div> <Link to="/" className="font-semibold hover:underline">Home</Link></div>
-                <div>Top HeadLines</div>
-                <div>Technology</div>
-                <div><Link to="/sports"> Sport </Link></div>
-                <div>Entertainment</div>
+                <div> <Link to="/">Home</Link></div>
+                <div> <Link to="/news/world">World</Link></div>
+                <div> <Link to="/news/business">Business</Link></div>
+                <div> <Link to="/news/technology">Technology</Link></div>
+                <div> <Link to="/news/politics">Politics</Link></div>
+                <div> <Link to="/news/health">Helth</Link></div>
+                
             </div>
             {/* search logo */}
             <div className='flex items-center bg-white text-[#192025] border rounded p-2'>
