@@ -4,6 +4,7 @@ import Home from './components/Home';
 import Navbar from './components/Navbar';
 import Newsdetails from './components/Newsdetails';
 import CategoryNews from './components/CategoryNews';
+import Search from './components/Search';
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/news/:category" element={<CategoryNews />} />
         <Route path="/news/details/:title" element={<Newsdetails />} />
+        <Route path="/Search" element={<Search />} />
+
       </Routes>
     </>
   );

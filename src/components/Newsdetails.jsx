@@ -21,7 +21,7 @@ const Newsdetails = () => {
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-4">{news.title}</h1>
       <img
-        src={news.multimedia?.[0]?.url || news.multimedia?.[1]?.url || '/card.png'}
+        src={news.multimedia?.[0]?.url || news.multimedia?.default?.url || '/card.png'}
         alt="news"
         className="w-full h-96 object-cover rounded-lg mb-4"
       />

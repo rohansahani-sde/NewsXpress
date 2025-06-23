@@ -1,9 +1,25 @@
 // import React from 'react'
+import { useState } from 'react';
 import { FaSearch } from 'react-icons/fa'
 // import logo from '/logo.png'
-import { Link, Links } from 'react-router-dom';
+import { Link, Links, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+
+    const [query, setQuery] = useState('');
+    const navigate = useNavigate();
+
+  
+    const handleSearch = (e) =>{
+        e.preventDefault();    
+        if (query.trim()) {
+            navigate(`/search?q=${encodeURIComponent(query.trim())}`);
+            // setQuery(''); // Clear input after search
+        }
+        console.log('search button clicked')
+    }
+    
+    
   return (
     <>
     <nav className=' text-white'>
@@ -23,7 +39,7 @@ const Navbar = () => {
                 
             </div>
             {/* search logo */}
-            <div className='flex items-center bg-white text-[#192025] border rounded p-2'>
+            {/* <div className='flex items-center bg-white text-[#192025] border rounded p-2'>
                 <input
                 type="text"
                 placeholder="Search news..."
@@ -33,7 +49,22 @@ const Navbar = () => {
                 <FaSearch/>
                 
 
-            </div>
+            </div> */}
+            <form onSubmit={handleSearch} className="flex gap-2" >
+                <input
+                type="text"
+                placeholder="Search news..."
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="px-3 py-1 border rounded text-black"
+                />
+                <button
+                type="submit"
+                className="bg-blue-500 text-white px-3 py-1 rounded"
+                >
+                    Search
+                </button>
+            </form>
             
         </div>
     </nav>
