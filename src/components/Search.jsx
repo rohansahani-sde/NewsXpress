@@ -9,7 +9,9 @@ const Search = () => {
 
     const { search } = useLocation();
     const [loading, setLoading] = useState(true);
+    const [isLoadingMore, setIsLoadingMore] = useState(false);
     const[articles, setArticles] = useState([]);
+    const[page, setPage] = useState(0);
 
     // get query from url
     const query = new URLSearchParams(search).get('q');
@@ -17,24 +19,36 @@ const Search = () => {
     // fetch data from api
     const fetchSearchNews = async () => {
         try {
-            setLoading(true);
+            if (page === 0) setLoading(true);           // first load
+            else setIsLoadingMore(true);  
+            // setLoading(true);
             const res = await instance.get(`/search/v2/articlesearch.json`, {
                 params: {
                     'api-key': import.meta.env.VITE_NYT_API_KEY,
+                    'page': page,
                     'q': query,
                 },
             });
-            setArticles(res.data.response.docs || []);
+            setArticles(prev=> [...prev, ...(res.data.response.docs || []) ] );
         } catch (err) {
             console.error("Error fetching category news:", err);
         } finally {
             setLoading(false);
+            setIsLoadingMore(false);
         }
     };
 
   useEffect(() => {
-    if(query) fetchSearchNews();
+    if(query){
+        setArticles([]);
+        setPage(0);
+    } 
   }, [query]);
+
+  useEffect(() => {
+  if (query) fetchSearchNews();
+}, [page , query]); 
+
     
     
   return (
@@ -42,12 +56,13 @@ const Search = () => {
       <h1 className="text-2xl font-bold mb-4 capitalize">Results for: <span className='text-[#fcd133]'>{query}</span>  </h1>
 
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {loading
+        {loading 
           ? Array.from({ length: 6 }).map((_, i) => <NewsSkeleton key={i} />)
           : articles.map((news, index) => (
               <Link
                 // to={`/news/details/${news.title}`}
                 to={`/news/details/${encodeURIComponent(news.headline.main)}`}
+                // navigate()
 
                 key={index}
                 state={{ news }}
@@ -64,6 +79,10 @@ const Search = () => {
                 />
               </Link>
             ))}
+            
+      </div>
+      <div>
+        <h1 onClick={()=> setPage(page+1)} className='text-blue-500'>Load More..</h1>
       </div>
     </div>
   )
