@@ -21,10 +21,10 @@ export default function Footer() {
         <div>
           <h3 className="text-xl font-semibold text-white mb-4">Categories</h3>
           <ul className="space-y-2 text-sm">
-            <li><a href="/news/politics" className="hover:text-white">Politics</a></li>
-            <li><a href="/news/technology" className="hover:text-white">Technology</a></li>
-            <li><a href="/news/health" className="hover:text-white">Health</a></li>
-            <li><a href="/news/business" className="hover:text-white">Business</a></li>
+            <li><Link to="/news/politics" className="hover:text-white">Politics</Link></li>
+            <li><Link to="/news/technology" className="hover:text-white">Technology</Link></li>
+            <li><Link to="/news/health" className="hover:text-white">Health</Link></li>
+            <li><Link to="/news/business" className="hover:text-white">Business</Link></li>
           </ul>
         </div>
 
