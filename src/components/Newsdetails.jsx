@@ -5,7 +5,7 @@ const Newsdetails = () => {
   const { state } = useLocation();
   const news = state?.news;
   const navigate = useNavigate();
-  console.log(news);
+  // console.log(news);
 
   if (!news) {
     return (
