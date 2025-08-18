@@ -47,10 +47,10 @@ export default function Footer() {
           <p className="text-sm">📞 +91 9793091350</p>
 
           <div className="flex space-x-4 mt-4">
-            <a href="https://www.linkedin.com/in/rohan-sahani-09-/" target="_blank" className="hover:text-white"><Linkedin size={20} /></a>
-            <a href="https://github.com/rohansahani-sde/" target="_blank" className="hover:text-white"><Github size={20} /></a>
-            <a href="https://x.com/9793_rohan" target="_blank" className="hover:text-white"><Twitter size={20} /></a>
-            <a href="https://github.com/rohansahani-sde/" className="hover:text-white"><Instagram size={20} /></a>
+            <Link to="https://www.linkedin.com/in/rohan-sahani-09-/" target="_blank" className="hover:text-white"><Linkedin size={20} /></Link>
+            <Link to="https://github.com/rohansahani-sde/" target="_blank" className="hover:text-white"><Github size={20} /></Link>
+            <Link to="https://x.com/9793_rohan" target="_blank" className="hover:text-white"><Twitter size={20} /></Link>
+            <Link to="https://github.com/rohansahani-sde/" className="hover:text-white"><Instagram size={20} /></Link>
             {/* <a href="#" className="hover:text-white"><Youtube size={20} /></a> */}
           </div>
         </div>
