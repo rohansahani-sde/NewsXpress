@@ -1,34 +1,36 @@
 import React from 'react';
-import { data, Link } from 'react-router-dom';
 
 const Card = ({ title, description, urlToImage, source, date }) => {
   return (
-    <>
-    {/* <Link to={`/news/${data.title}`} 
-    state={{data}}
-    > */}
-    <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300 dark:bg-gray-800">
+    <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-200 dark:border-gray-700">
+      {/* Image */}
       {urlToImage && (
         <img
-          className="h-48 w-full object-cover"
           src={urlToImage}
           alt="news"
+          className="w-full h-52 object-cover object-center transition-transform duration-300 hover:scale-105"
         />
       )}
-      <div className="p-4">
-        <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">{title}</h2>
-        <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
-          {description ? description.slice(0, 100) + '...' : 'No description available.'}
+
+      {/* Content */}
+      <div className="p-5 flex flex-col justify-between h-full">
+        {/* Title */}
+        <h2 className="text-xl font-bold text-gray-800 dark:text-white leading-tight mb-2 line-clamp-2">
+          {title}
+        </h2>
+
+        {/* Description */}
+        <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
+          {description ? description : 'No description available.'}
         </p>
-        <div className="text-xs text-gray-500 dark:text-gray-400 flex justify-between items-center">
-          <span>{source}</span>
+
+        {/* Meta Info */}
+        <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-auto">
+          <span>{source || 'The New York Times'}</span>
           <span>{new Date(date).toLocaleDateString()}</span>
         </div>
       </div>
     </div>
-    {/* </Link> */}
-    
-    </>
   );
 };
 

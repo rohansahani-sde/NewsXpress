@@ -7,9 +7,7 @@ import PageWrapper from '../pages/PageWrapper'
 const Home = () => {
   return (
     <>
-    <main>
-        
-        
+    <main>        
             <Topheadline />
         
         

@@ -11,9 +11,9 @@ createRoot(document.getElementById('root')).render(
     <StrictMode>
       <BrowserRouter>
       {/* <Navbar /> */}
+      <App />
       <PageWrapper>
 
-      <App />
       </PageWrapper>
       </BrowserRouter>
     </StrictMode>,

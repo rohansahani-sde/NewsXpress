@@ -5,19 +5,37 @@ import Navbar from './components/Navbar';
 import Newsdetails from './components/Newsdetails';
 import CategoryNews from './components/CategoryNews';
 import Search from './components/Search';
+import GoTop from './components/GoTop';
+import PageWrapper from './pages/PageWrapper';
+import Footer from './components/Footer';
+import About from './pages/About';
+import Contact from './pages/Contact';
+
 
 function App() {
+
+   const hideNavbar = location.pathname.startsWith("/news/details");
   return (
     <>
-      <Navbar />
+      {!hideNavbar && <Navbar />}
 
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<PageWrapper> <Home /> </PageWrapper> } />
         <Route path="/news/:category" element={<CategoryNews />} />
         <Route path="/news/details/:title" element={<Newsdetails />} />
-        <Route path="/Search" element={<Search />} />
+        <Route path="/Search" element={ 
+          <PageWrapper>
+          <Search />
+      </PageWrapper>
+          } />
+        
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+
 
       </Routes>
+      <GoTop />
+      <Footer />
     </>
   );
 }
