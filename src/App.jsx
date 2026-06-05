@@ -1,86 +1,42 @@
+import { lazy, Suspense, useEffect } from "react";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import AppShell from "./components/layout/AppShell.jsx";
+import ErrorBoundary from "./components/ui/ErrorBoundary.jsx";
+import RouteFallback from "./components/ui/RouteFallback.jsx";
 
-import { Route, Routes } from 'react-router-dom';
-import Home from './components/Home';
-import Navbar from './components/Navbar';
-import Newsdetails from './components/Newsdetails';
-import CategoryNews from './components/CategoryNews';
-import Search from './components/Search';
-import GoTop from './components/GoTop';
-import PageWrapper from './pages/PageWrapper';
-import Footer from './components/Footer';
-import About from './pages/About';
-import Contact from './pages/Contact';
+const HomePage = lazy(() => import("./pages/HomePage.jsx"));
+const CategoryPage = lazy(() => import("./pages/CategoryPage.jsx"));
+const SearchPage = lazy(() => import("./pages/SearchPage.jsx"));
+const NewsDetailPage = lazy(() => import("./pages/NewsDetailPage.jsx"));
+const AboutPage = lazy(() => import("./pages/AboutPage.jsx"));
+const ContactPage = lazy(() => import("./pages/ContactPage.jsx"));
 
+export default function App() {
+  const location = useLocation();
 
-function App() {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [location.pathname]);
 
-   const hideNavbar = location.pathname.startsWith("/news/details");
   return (
-    <>
-      {!hideNavbar && <Navbar />}
-
-      <Routes>
-        <Route path="/" element={<PageWrapper> <Home /> </PageWrapper> } />
-        <Route path="/news/:category" element={<CategoryNews />} />
-        <Route path="/news/details/:title" element={<Newsdetails />} />
-        <Route path="/Search" element={ 
-          <PageWrapper>
-          <Search />
-      </PageWrapper>
-          } />
-        
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-
-
-      </Routes>
-      <GoTop />
-      <Footer />
-    </>
+    <ErrorBoundary>
+      <AppShell>
+        <Suspense fallback={<RouteFallback />}>
+          <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/news/:category" element={<CategoryPage />} />
+              <Route path="/news/details/:title" element={<NewsDetailPage />} />
+              <Route path="/search" element={<SearchPage />} />
+              <Route path="/Search" element={<Navigate to={`/search${location.search}`} replace />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </AnimatePresence>
+        </Suspense>
+      </AppShell>
+    </ErrorBoundary>
   );
 }
-
-export default App;
-
-
-
-
-
-
-
-// import { useState } from 'react'
-// // import reactLogo from './assets/react.svg'
-// // import viteLogo from '/vite.svg'
-// // import './App.css'
-// import Home from './components/Home'
-// import Sport from './pages/Sport'
-// import { Route, Routes } from 'react-router-dom'
-// import Navbar from './components/Navbar'
-// import Loader from './components/Loader'
-// import PageWrapper from './pages/PageWrapper'
-// import Newsdetails from './components/Newsdetails'
-// import CategoryNews from './components/CategoryNews'
-
-// function App() {
-//   const [count, setCount] = useState(0)
-
-//   return (
-//     <>
-//     {/* <PageWrapper> */}
-//     <Navbar/>
-//     {/* </PageWrapper> */}
-//     {/* <Loader/> */}
-    
-//     <Routes>
-//       <Route path="/" element={<Home />} />
-//       {/* <Route path="/sports" element={<Sport />} /> */}
-//       {/* <Route path="/news/:category" element={<CategoryNews />} /> */}
-//       <Route path="/news/details/:title" element={<CategoryNews />} />
-//     </Routes>
-//       {/* <Home/> */}
-
-//     </>
-//   )
-// }
-
-// export default App
